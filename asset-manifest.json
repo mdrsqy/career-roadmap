@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/career-map/static/css/main.ccacab11.css",
+    "main.js": "/career-map/static/js/main.576a0115.js",
+    "index.html": "/career-map/index.html",
+    "main.ccacab11.css.map": "/career-map/static/css/main.ccacab11.css.map",
+    "main.576a0115.js.map": "/career-map/static/js/main.576a0115.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ccacab11.css",
+    "static/js/main.576a0115.js"
+  ]
+}
