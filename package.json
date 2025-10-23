@@ -1,6 +1,6 @@
 {
-  "name": "career-map",
   "homepage": "https://mdrsqy.github.io/career-map",
+  "name": "career-map",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
