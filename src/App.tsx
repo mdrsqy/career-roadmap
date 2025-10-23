@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-// ... (imports utuh)
+import React, { useState, useEffect } from "react"; // Hapus Fragment
 import {
   Briefcase,
   BookOpen,
@@ -12,6 +11,7 @@ import {
   X,
   ArrowUp,
   Target,
+  // Ganti panah zigzag dengan panah ke bawah
   ArrowDownCircle,
   // Impor ikon tambahan untuk latar belakang
   Cloud,
@@ -29,7 +29,6 @@ import {
 } from "lucide-react";
 
 type RoadmapStep = {
-  // ... (definisi tipe utuh)
   month: string;
   title: string;
   icon: React.ReactElement;
@@ -44,103 +43,68 @@ type StrategyItem = {
   color: "blue" | "orange";
 };
 
-// PERBAIKAN: Terapkan tipe data dan sesuaikan warna ikon
+// ROADMAP KARIR (BERTINGKAT & LINGKUP JABATAN)
 const roadmap: RoadmapStep[] = [
-  // ... (data roadmap utuh)
   {
     month: "Agustus 2025",
-    title: "Mulai Magang di Digistar Telkom Witel Kalbar (Regional IV)",
+    title: "Magang Data Analyst",
     icon: <Briefcase className="w-8 h-8 text-[#0076D6]" />,
-    desc: "Aku memulai perjalanan profesional dengan magang di program Digistar Telkom. Fokusku adalah mengerjakan proyek analisis data internal dan riset kecil penerapan machine learning untuk efisiensi operasional Telkom.",
+    desc: "Memulai pengalaman profesional dengan menganalisis data operasional Telkom, membuat laporan insight, dan mendukung tim dalam proyek internal.",
   },
   {
     month: "September 2025",
-    title: "Mulai Semester Akhir & Menyusun Topik Tugas Akhir",
+    title: "Asisten Peneliti & Penyusun Tugas Akhir",
     icon: <BookOpen className="w-8 h-8 text-[#F6A623]" />,
-    desc: "Aku mulai menyusun proposal Tugas Akhir dengan topik OCR Aksara Tradisional Indonesia. Pada tahap ini aku merancang dataset, struktur eksperimen, dan pendekatan model deep learning yang akan digunakan.",
+    desc: "Membantu riset AI/Data Science, menyiapkan dataset, merancang metodologi eksperimen, dan memulai pengembangan model AI untuk tugas akhir.",
   },
   {
-    month: "Oktober 2025",
-    title: "Eksperimen Awal Deep Learning",
+    month: "Oktober–Desember 2025",
+    title: "Junior AI/ML Engineer",
     icon: <Brain className="w-8 h-8 text-[#0076D6]" />,
-    desc: "Aku melakukan eksperimen awal menggunakan model CNN ringan untuk mengenali karakter aksara. Di tahap ini aku mulai memahami arsitektur, parameter, dan tantangan akurasi antar-aksara.",
-  },
-  {
-    month: "November 2025",
-    title: "Fine-Tuning & Ensemble Modeling",
-    icon: <Layers className="w-8 h-8 text-[#F6A623]" />,
-    desc: "Aku melakukan fine-tuning terhadap model seperti ResNet dan MobileNet, serta menggabungkannya dengan teknik ensemble voting untuk hasil klasifikasi yang lebih akurat dan stabil.",
-  },
-  {
-    month: "Desember 2025",
-    title: "Analisis Akhir & Penulisan Skripsi",
-    icon: <Code className="w-8 h-8 text-[#0076D6]" />,
-    desc: "Aku menganalisis performa model, membuat visualisasi hasil, dan menulis Bab IV–V skripsi. Pada tahap ini aku juga mulai menyiapkan presentasi untuk sidang akhir.",
+    desc: "Melakukan eksperimen model Machine Learning/Deep Learning, analisis performa, dan mulai membangun portofolio proyek AI/Data pribadi.",
   },
   {
     month: "Januari 2026",
-    title: "Sidang Tugas Akhir & Wisuda",
+    title: "Data Analyst Profesional",
     icon: <GraduationCap className="w-8 h-8 text-[#F6A623]" />,
-    desc: "Aku menjalani sidang Tugas Akhir di Universitas Telkom dan resmi lulus. Proyek OCR aksara tradisionalku menjadi karya yang membanggakan dan menjadi dasar portofolio AI-ku.",
+    desc: "Bekerja sebagai Data Analyst penuh waktu, memproses data operasional, membuat dashboard, dan memberikan insight bisnis berbasis data.",
   },
   {
-    month: "Februari 2026",
-    title: "Publikasi & Presentasi Penelitian",
-    icon: <Brain className="w-8 h-8 text-[#0076D6]" />,
-    desc: "Aku menulis paper ilmiah berdasarkan hasil skripsi dan mengajukannya ke konferensi nasional bidang kecerdasan buatan untuk dipublikasikan.",
-  },
-  {
-    month: "Maret 2026",
-    title: "Menjadi Asisten Riset & Kontributor Open Source",
-    icon: <Brain className="w-8 h-8 text-[#F6A623]" />,
-    desc: "Aku mulai berkontribusi dalam proyek riset terbuka di GitHub dan membantu penelitian AI lokal, sambil memperdalam pemahaman tentang NLP dan computer vision.",
-  },
-  {
-    month: "April 2026",
-    title: "Membangun Portfolio Data & AI",
+    month: "Februari–Mei 2026",
+    title: "AI Engineer & Portfolio Development",
     icon: <Database className="w-8 h-8 text-[#0076D6]" />,
-    desc: "Aku membangun portofolio profesional yang berisi proyek analisis data, deep learning, dan AI deployment berbasis Python dan TensorFlow.",
+    desc: "Mengembangkan skill AI/ML profesional, membangun portofolio proyek, serta melakukan deployment model AI sederhana untuk studi kasus internal dan personal.",
   },
   {
-    month: "Mei 2026",
-    title: "Belajar MLOps & Cloud Computing",
+    month: "Juni–Juli 2026",
+    title: "Freelance Data & AI Consultant",
     icon: <LineChart className="w-8 h-8 text-[#F6A623]" />,
-    desc: "Aku memperdalam penerapan model AI di lingkungan produksi menggunakan Docker, FastAPI, dan Google Cloud AI agar model bisa berjalan secara real-time.",
-  },
-  {
-    month: "Juni 2026",
-    title: "Mengikuti Kompetisi AI & Data Science",
-    icon: <Brain className="w-8 h-8 text-[#0076D6]" />,
-    desc: "Aku berpartisipasi dalam kompetisi seperti Kaggle dan DrivenData untuk mengasah kemampuan analitik dan problem solving berbasis data dunia nyata.",
-  },
-  {
-    month: "Juli 2026",
-    title: "Mulai Freelance sebagai Data Analyst & AI Engineer",
-    icon: <Briefcase className="w-8 h-8 text-[#F6A623]" />,
-    desc: "Aku mulai menerima proyek freelance di bidang analitik, prediksi, dan pembuatan model AI untuk membantu bisnis dan penelitian akademik.",
+    desc: "Memberikan layanan analisis data, predictive modeling, dan implementasi solusi AI untuk klien dan proyek open-source, sambil mengasah pengalaman konsultasi.",
   },
   {
     month: "Agustus–Desember 2026",
-    title: "Menjadi Junior AI Engineer & Peneliti Independen",
+    title: "Junior AI Engineer / Peneliti Independen",
     icon: <Cpu className="w-8 h-8 text-[#0076D6]" />,
-    desc: "Aku meniti karier profesional sebagai Junior AI Engineer sambil melanjutkan riset independen tentang OCR, NLP, dan model multimodal.",
+    desc: "Bekerja sebagai Junior AI Engineer, mengembangkan model AI untuk produksi, serta melakukan riset independen dalam NLP, Computer Vision, dan model multimodal.",
   },
 ];
 
 const futurePlans = [
-  // ... (data futurePlans utuh)
   {
-    year: "2027–2030",
-    plan: "Menjadi AI Research Engineer yang fokus pada Computer Vision, NLP, dan sistem berbasis data. Aku ingin terus riset dan publikasi di bidang AI yang berdampak luas.",
+    year: "2027–2028",
+    plan: "Menjadi Auditor Data / Senior Data Analyst, memimpin audit kualitas data dan integritas sistem, serta memimpin proyek AI/Data skala menengah.",
+  },
+  {
+    year: "2029–2030",
+    plan: "Menjadi Manager Bidang Analisis / AI / Data, memimpin tim, mengelola proyek strategis, dan memastikan implementasi solusi berbasis data yang efektif dan efisien.",
   },
   {
     year: "2030+",
-    plan: "Mendirikan startup riset AI berbasis computational science untuk mengembangkan solusi di bidang energi, lingkungan, pendidikan, dan budaya.",
+    plan: "Mendirikan startup riset AI berbasis Computational Science untuk mengembangkan solusi inovatif di bidang energi, lingkungan, pendidikan, dan budaya.",
   },
 ];
 
 const interests = [
-  // ... (data interests utuh)
   "Mathematics & Statistics",
   "Competitive Programming",
   "Machine Learning & Deep Learning",
@@ -211,7 +175,6 @@ const strategyData: StrategyItem[] = [
 
 // Array ikon untuk latar belakang abstrak
 const backgroundIcons = [
-  // ... (ikon utuh)
   <Briefcase />,
   <BookOpen />,
   <GraduationCap />,
@@ -261,7 +224,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // ... (useEffect untuk style dan observer utuh)
     document.title = "Roadmap Career";
 
     const style = document.createElement("style");
@@ -326,10 +288,10 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased">
+    // --- PERUBAHAN: Latar belakang gradien halus ---
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800 font-sans antialiased">
       {/* Header (Warna solid Biru) */}
       <header className="relative h-auto md:h-48 w-full text-white shadow-xl py-12 md:py-0 flex items-center justify-center">
-        {/* ... (isi header utuh) */}
         <div className="absolute inset-0 bg-[#0076D6]"></div>
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white flex items-center justify-center gap-4">
@@ -344,7 +306,7 @@ export default function App() {
       </header>
 
       {/* Roadmap Section */}
-      <section className="py-20 px-6 md:px-12 bg-gray-50 relative overflow-hidden">
+      <section className="pt-10 pb-20 px-6 md:px-12 relative overflow-hidden">
         {/* Latar Belakang Ikon Abstrak */}
         <div className="absolute inset-0 z-0 opacity-5 pointer-events-none">
           {Array.from({ length: 25 }).map((_, idx) => {
@@ -379,7 +341,8 @@ export default function App() {
           })}
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto pt-10">
+        {/* --- Layout kembali ke 1 kolom --- */}
+        <div className="relative z-10 max-w-5xl mx-auto">
           {roadmap.map((step, i) => {
             const isEven = i % 2 === 0;
             const textColor = isEven ? "text-[#0076D6]" : "text-[#F6A623]";
@@ -415,10 +378,15 @@ export default function App() {
                   </div>
                 </div>
 
+                {/* --- Kembalikan panah ke bawah --- */}
                 {i < roadmap.length - 1 && (
                   <div className="flex justify-center mt-8">
                     <ArrowDownCircle
-                      className={`w-10 h-10 ${textColor} opacity-60`}
+                      className={`w-10 h-10 ${
+                        (i + 1) % 2 === 0 // Warna panah mengikuti kartu BERIKUTNYA
+                          ? "text-[#0076D6]"
+                          : "text-[#F6A623]"
+                      } opacity-60 transition-opacity duration-300 group-hover:opacity-80 animate-bounce`} // Tambah animasi bounce
                     />
                   </div>
                 )}
@@ -429,8 +397,7 @@ export default function App() {
       </section>
 
       {/* Future Plans (Latar belakang abu-abu) */}
-      <section className="py-20 px-6 md:px-12 bg-gray-50">
-        {/* ... (isi future plans utuh) */}
+      <section className="py-20 px-6 md:px-12 bg-gray-100"> {/* Ganti bg */}
         <h2 className="text-4xl font-bold text-center text-[#0076D6] mb-16">
           Future Planning
         </h2>
@@ -454,35 +421,37 @@ export default function App() {
       {/* --- SECTION UNIK (INTERAKTIF) --- */}
       <section className="py-20 px-6 md:px-12 bg-white">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {strategyData.map((item, i) => (
-            <div
-              key={i}
-              onClick={() => setSelectedStrategy(item)}
-              className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-2xl shadow-lg fade-in-section cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105"
-            >
-              {item.icon}
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
-                {item.title}
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                {/* Tampilkan cuplikan singkat */}
-                {item.title === "Langkah Strategis"
-                  ? "Jangka Pendek & Jangka Menengah..."
-                  : "Klik untuk melihat detail..."}
-              </p>
-              <span
-                className={`text-sm font-medium text-[#0076D6] mt-auto inline-block`}
+          {strategyData.map((item, i) => {
+             // --- PERUBAHAN: Tambahkan border outline ---
+             const borderColor = item.color === "blue" ? "border-[#0076D6]" : "border-[#F6A623]";
+             return (
+              <div
+                key={i}
+                onClick={() => setSelectedStrategy(item)}
+                className={`flex flex-col items-center text-center p-6 bg-white rounded-2xl border-2 border-dashed ${borderColor} shadow-lg fade-in-section cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105`} // Ubah bg dan tambah border
               >
-                Lihat Detail &rarr;
-              </span>
-            </div>
-          ))}
+                {item.icon}
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  {item.title === "Langkah Strategis"
+                    ? "Jangka Pendek & Jangka Menengah..."
+                    : "Klik untuk melihat detail..."}
+                </p>
+                <span
+                  className={`text-sm font-medium text-[#0076D6] mt-auto inline-block`}
+                >
+                  Lihat Detail &rarr;
+                </span>
+              </div>
+             );
+          })}
         </div>
       </section>
 
       {/* Interests (Latar belakang putih) */}
       <section className="py-20 px-6 md:px-12 bg-white">
-        {/* ... (isi interests utuh) */}
         <h2 className="text-4xl font-bold text-center text-[#0076D6] mb-16">
           Minat & Keahlian
         </h2>
@@ -490,7 +459,8 @@ export default function App() {
           {interests.map((interest, i) => (
             <div
               key={i}
-              className="bg-white border-2 border-blue-200 text-[#0076D6] font-medium px-5 py-3 rounded-full shadow-sm hover:bg-blue-50 transition-all cursor-default fade-in-section"
+              // --- PERUBAHAN: Animasi hover scale ---
+              className="bg-white border-2 border-blue-200 text-[#0076D6] font-medium px-5 py-3 rounded-full shadow-sm hover:bg-blue-50 transition-all cursor-default fade-in-section transform hover:scale-105 duration-200"
             >
               {interest}
             </div>
@@ -500,7 +470,6 @@ export default function App() {
 
       {/* --- Footer (BG gray-900, aksen oranye) --- */}
       <footer className="bg-gray-900 text-gray-400 py-8 px-6">
-        {/* ... (isi footer utuh) */}
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           <p className="text-sm text-center">
             © {new Date().getFullYear()}
@@ -555,7 +524,7 @@ export default function App() {
         </>
       )}
 
-      {/* === Modal Strategi (BARU) === */}
+      {/* === Modal Strategi === */}
       {selectedStrategy && (
         <>
           <div
@@ -592,7 +561,6 @@ export default function App() {
       {/* === Tombol Kembali ke Atas (Warna Biru) === */}
       {isVisible && (
         <button
-          // ... (isi tombol utuh)
           onClick={scrollToTop}
           className="fixed bottom-6 right-6 z-50 p-3 bg-[#0076D6] text-white rounded-full shadow-lg hover:bg-[#005faa] transition-all duration-300 ease-in-out transform hover:scale-110"
           aria-label="Kembali ke atas"
