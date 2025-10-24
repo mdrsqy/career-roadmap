@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/career-roadmap/static/css/main.4667bf5f.css",
-    "main.js": "/career-roadmap/static/js/main.96c22c3a.js",
+    "main.css": "/career-roadmap/static/css/main.b5fad9b4.css",
+    "main.js": "/career-roadmap/static/js/main.e1cca330.js",
     "index.html": "/career-roadmap/index.html",
-    "main.4667bf5f.css.map": "/career-roadmap/static/css/main.4667bf5f.css.map",
-    "main.96c22c3a.js.map": "/career-roadmap/static/js/main.96c22c3a.js.map"
+    "main.b5fad9b4.css.map": "/career-roadmap/static/css/main.b5fad9b4.css.map",
+    "main.e1cca330.js.map": "/career-roadmap/static/js/main.e1cca330.js.map"
   },
   "entrypoints": [
-    "static/css/main.4667bf5f.css",
-    "static/js/main.96c22c3a.js"
+    "static/css/main.b5fad9b4.css",
+    "static/js/main.e1cca330.js"
   ]
 }
