@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Hapus Fragment
+import React, { useState, useEffect } from "react";
 import {
   Briefcase,
   BookOpen,
@@ -11,9 +11,7 @@ import {
   X,
   ArrowUp,
   Target,
-  // Ganti panah zigzag dengan panah ke bawah
   ArrowDownCircle,
-  // Impor ikon tambahan untuk latar belakang
   Cloud,
   Cpu,
   Feather,
@@ -22,10 +20,9 @@ import {
   Lightbulb,
   MessageCircle,
   Zap,
-  // Ikon untuk section baru
   UserCheck,
   Flag,
-  ListChecks, // Mengganti ListSteps
+  ListChecks,
 } from "lucide-react";
 
 type RoadmapStep = {
@@ -35,13 +32,15 @@ type RoadmapStep = {
   desc: string;
 };
 
-// --- Tipe data baru untuk modal strategi ---
 type StrategyItem = {
   title: string;
   content: React.ReactElement;
   icon: React.ReactElement;
   color: "blue" | "orange";
 };
+
+// ... (Data Anda: roadmap, futurePlans, interests, strategyData, backgroundIcons) ...
+// [SEMUA DATA DARI KODE ASLI ANDA TETAP SAMA DI SINI]
 
 // ROADMAP KARIR (BERTINGKAT & LINGKUP JABATAN)
 const roadmap: RoadmapStep[] = [
@@ -193,10 +192,8 @@ const backgroundIcons = [
   <MessageCircle />,
   <Zap />,
 ];
-
 export default function App() {
   const [selectedStep, setSelectedStep] = useState<RoadmapStep | null>(null);
-  // --- State baru untuk modal strategi ---
   const [selectedStrategy, setSelectedStrategy] =
     useState<StrategyItem | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -260,6 +257,47 @@ export default function App() {
       .modal-fade {
         animation: modal-fade-in 0.2s ease-out forwards;
       }
+      
+      /* --- PRINT STYLES --- */
+      @media print {
+        body, .font-sans {
+          font-family: Arial, sans-serif !important;
+          color: #000 !important;
+          background: #fff !important;
+        }
+
+        /* Matikan semua animasi fade-in */
+        .fade-in-section {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        
+        /* Paksa warna teks menjadi hitam dan bg putih */
+        .text-white, .text-gray-400, .text-\\[\\#F6A623\\], .text-\\[\\#0076D6\\],
+        .text-gray-700, .text-gray-800, .text-gray-600 {
+           color: #000 !important;
+        }
+        .bg-gray-100, .bg-gray-900, .bg-\\[\\#0076D6\\] {
+           background: #fff !important;
+        }
+
+        /* Hapus semua bayangan */
+        .shadow-lg, .shadow-xl, .shadow-2xl, .shadow-sm {
+          box-shadow: none !important;
+        }
+        
+        /* Ubah border putus-putus menjadi solid */
+        .border-dashed {
+          border-style: solid !important;
+          border-color: #aaa !important; /* Warna border lebih netral */
+        }
+        
+        /* Kurangi padding section */
+        section {
+          padding-top: 1.5rem !important;
+          padding-bottom: 1.5rem !important;
+        }
+      }
     `;
     document.head.appendChild(style);
 
@@ -288,17 +326,22 @@ export default function App() {
   }, []);
 
   return (
-    // --- PERUBAHAN: Latar belakang gradien halus ---
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800 font-sans antialiased">
-      {/* Header (Warna solid Biru) */}
-      <header className="relative h-auto md:h-48 w-full text-white shadow-xl py-12 md:py-0 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#0076D6]"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white flex items-center justify-center gap-4">
+    // Tambahkan print:bg-white
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800 font-sans antialiased print:bg-white">
+      {/* Header */}
+      {/* Tambahkan print:h-auto print:bg-white print:shadow-none print:py-8 */}
+      <header className="relative h-auto md:h-48 w-full text-white shadow-xl py-12 md:py-0 flex items-center justify-center print:h-auto print:bg-white print:shadow-none print:py-8">
+        {/* Tambahkan print:hidden untuk menyembunyikan background biru solid */}
+        <div className="absolute inset-0 bg-[#0076D6] print:hidden"></div>
+        {/* Tambahkan print:text-black */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 print:text-black">
+          {/* Tambahkan print:text-black */}
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white flex items-center justify-center gap-4 print:text-black">
             <span>Roadmap Career</span>
             <Target className="w-10 h-10 opacity-90" />
           </h1>
-          <div className="mt-4 text-white opacity-90 text-md space-y-1">
+          {/* Tambahkan print:text-black print:opacity-100 */}
+          <div className="mt-4 text-white opacity-90 text-md space-y-1 print:text-black print:opacity-100">
             <p>Kelompok: Soft Skill 14</p>
             <p>Nama: Muhammad Dzaky Ramdani Syakur</p>
           </div>
@@ -308,7 +351,8 @@ export default function App() {
       {/* Roadmap Section */}
       <section className="pt-10 pb-20 px-6 md:px-12 relative overflow-hidden">
         {/* Latar Belakang Ikon Abstrak */}
-        <div className="absolute inset-0 z-0 opacity-5 pointer-events-none">
+        {/* Tambahkan print:hidden */}
+        <div className="absolute inset-0 z-0 opacity-5 pointer-events-none print:hidden">
           {Array.from({ length: 25 }).map((_, idx) => {
             const Icon =
               backgroundIcons[
@@ -341,7 +385,7 @@ export default function App() {
           })}
         </div>
 
-        {/* --- Layout kembali ke 1 kolom --- */}
+        {/* Layout */}
         <div className="relative z-10 max-w-5xl mx-auto">
           {roadmap.map((step, i) => {
             const isEven = i % 2 === 0;
@@ -351,42 +395,48 @@ export default function App() {
               : "border-[#F6A623]";
 
             let itemWrapperClass =
-              "relative mb-8 fade-in-section w-full md:max-w-2xl mx-auto";
+              "relative mb-8 fade-in-section w-full md:max-w-2xl mx-auto print:mb-4"; // Tambah print:mb-4
 
             return (
               <div key={i} className={itemWrapperClass}>
                 <div
-                  className={`relative bg-white p-6 rounded-2xl border-2 border-dashed ${borderColor} transition-all duration-300 hover:shadow-xl hover:scale-[1.02] cursor-pointer overflow-hidden`}
-                  onClick={() => setSelectedStep(step)}
+                  // Hapus onClick, tambahkan print overrides
+                  className={`relative bg-white p-6 rounded-2xl border-2 border-dashed ${borderColor} transition-all duration-300 overflow-hidden print:shadow-none print:scale-100 print:border-solid`}
+                  // Hapus: onClick={() => setSelectedStep(step)}
+                  // Hapus: hover:shadow-xl hover:scale-[1.02] cursor-pointer
                 >
+                  {/* Tambahkan print:hidden pada ikon background kartu */}
                   {React.cloneElement(step.icon, {
-                    className: `w-24 h-24 ${textColor} absolute -top-4 -right-4 opacity-10 pointer-events-none rotate-12`,
+                    className: `w-24 h-24 ${textColor} absolute -top-4 -right-4 opacity-10 pointer-events-none rotate-12 print:hidden`,
                   } as { className: string })}
 
                   <div className="relative z-10">
                     <h4 className="text-xl font-bold text-gray-800">
                       {step.title}
                     </h4>
-                    <p className="text-gray-600 mt-2 leading-relaxed line-clamp-2">
+                    {/* Ubah line-clamp-2 menjadi print:line-clamp-none */}
+                    <p className="text-gray-600 mt-2 leading-relaxed line-clamp-2 print:line-clamp-none">
                       {step.desc}
                     </p>
+                    {/* Tambahkan print:hidden pada link "Lihat Detail" */}
                     <span
-                      className={`text-sm font-medium text-[#0076D6] mt-3 inline-block`}
+                      className={`text-sm font-medium text-[#0076D6] mt-3 inline-block print:hidden`}
                     >
                       Lihat Detail &rarr;
                     </span>
                   </div>
                 </div>
 
-                {/* --- Kembalikan panah ke bawah --- */}
+                {/* Sembunyikan panah saat print */}
                 {i < roadmap.length - 1 && (
-                  <div className="flex justify-center mt-8">
+                  // Tambahkan print:hidden
+                  <div className="flex justify-center mt-8 print:hidden">
                     <ArrowDownCircle
                       className={`w-10 h-10 ${
-                        (i + 1) % 2 === 0 // Warna panah mengikuti kartu BERIKUTNYA
+                        (i + 1) % 2 === 0
                           ? "text-[#0076D6]"
                           : "text-[#F6A623]"
-                      } opacity-60 transition-opacity duration-300 group-hover:opacity-80 animate-bounce`} // Tambah animasi bounce
+                      } opacity-60 transition-opacity duration-300 group-hover:opacity-80 animate-bounce`}
                     />
                   </div>
                 )}
@@ -396,16 +446,19 @@ export default function App() {
         </div>
       </section>
 
-      {/* Future Plans (Latar belakang abu-abu) */}
-      <section className="py-20 px-6 md:px-12 bg-gray-100"> {/* Ganti bg */}
+      {/* Future Plans */}
+      {/* Tambahkan print:bg-white */}
+      <section className="py-20 px-6 md:px-12 bg-gray-100 print:bg-white">
         <h2 className="text-4xl font-bold text-center text-[#0076D6] mb-16">
           Future Planning
         </h2>
-        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        {/* Tambahkan print:grid-cols-1 print:gap-4 */}
+        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto print:grid-cols-1 print:gap-4">
           {futurePlans.map((item, i) => (
             <div
               key={i}
-              className="bg-white p-8 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300 ease-out fade-in-section"
+              // Tambahkan print:shadow-none print:scale-100
+              className="bg-white p-8 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300 ease-out fade-in-section print:shadow-none print:scale-100"
             >
               <h3 className="text-3xl font-bold text-[#F6A623] mb-3">
                 {item.year}
@@ -420,37 +473,47 @@ export default function App() {
 
       {/* --- SECTION UNIK (INTERAKTIF) --- */}
       <section className="py-20 px-6 md:px-12 bg-white">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Tambahkan print:grid-cols-1 print:gap-4 */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 print:grid-cols-1 print:gap-4">
           {strategyData.map((item, i) => {
-            // --- PERUBAHAN: Tambahkan border outline ---
-            const borderColor = item.color === "blue" ? "border-[#0076D6]" : "border-[#F6A623]";
+            const borderColor =
+              item.color === "blue" ? "border-[#0076D6]" : "border-[#F6A623]";
             return (
               <div
                 key={i}
-                onClick={() => setSelectedStrategy(item)}
-                className={`flex flex-col items-center text-center p-6 bg-white rounded-2xl border-2 border-dashed ${borderColor} shadow-lg fade-in-section cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105`} // Ubah bg dan tambah border
+                // Hapus onClick
+                // Tambahkan print:shadow-none print:scale-100 print:border-solid
+                className={`flex flex-col items-center text-center p-6 bg-white rounded-2xl border-2 border-dashed ${borderColor} shadow-lg fade-in-section transition-all duration-300 print:shadow-none print:scale-100 print:border-solid`} // Hapus hover, cursor-pointer, dll
+                // Hapus: onClick={() => setSelectedStrategy(item)}
               >
                 {item.icon}
                 <h3 className="text-xl font-bold text-gray-800 mb-2">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 text-sm mb-4">
+                {/* Tambahkan print:hidden */}
+                <p className="text-gray-600 text-sm mb-4 print:hidden">
                   {item.title === "Langkah Strategis"
                     ? "Jangka Pendek & Jangka Menengah..."
                     : "Klik untuk melihat detail..."}
                 </p>
+                {/* Tambahkan print:hidden */}
                 <span
-                  className={`text-sm font-medium text-[#0076D6] mt-auto inline-block`}
+                  className={`text-sm font-medium text-[#0076D6] mt-auto inline-block print:hidden`}
                 >
                   Lihat Detail &rarr;
                 </span>
+
+                {/* --- TAMBAHAN BARU: Tampilkan konten modal hanya saat print --- */}
+                <div className="hidden print:block print:text-left print:mt-4">
+                  {item.content}
+                </div>
               </div>
             );
           })}
         </div>
       </section>
 
-      {/* Interests (Latar belakang putih) */}
+      {/* Interests */}
       <section className="py-20 px-6 md:px-12 bg-white">
         <h2 className="text-4xl font-bold text-center text-[#0076D6] mb-16">
           Minat & Keahlian
@@ -459,8 +522,8 @@ export default function App() {
           {interests.map((interest, i) => (
             <div
               key={i}
-              // --- PERUBAHAN: Animasi hover scale ---
-              className="bg-white border-2 border-blue-200 text-[#0076D6] font-medium px-5 py-3 rounded-full shadow-sm hover:bg-blue-50 transition-all cursor-default fade-in-section transform hover:scale-105 duration-200"
+              // Tambahkan print:shadow-none print:scale-100 print:border-gray-800
+              className="bg-white border-2 border-blue-200 text-[#0076D6] font-medium px-5 py-3 rounded-full shadow-sm hover:bg-blue-50 transition-all cursor-default fade-in-section transform hover:scale-105 duration-200 print:shadow-none print:scale-100 print:border-gray-800"
             >
               {interest}
             </div>
@@ -468,109 +531,101 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- Footer (BG gray-900, aksen oranye) --- */}
-      <footer className="bg-gray-900 text-gray-400 py-8 px-6">
+      {/* --- Footer --- */}
+      {/* Tambahkan print:bg-white print:text-black */}
+      <footer className="bg-gray-900 text-gray-400 py-8 px-6 print:bg-white print:text-black">
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           <p className="text-sm text-center">
             © {new Date().getFullYear()}
-            <span className="text-[#F6A623] font-semibold"> Dzaky</span>
+            {/* Tambahkan print:text-black */}
+            <span className="text-[#F6A623] font-semibold print:text-black">
+              {" "}
+              Dzaky
+            </span>
           </p>
         </div>
       </footer>
 
       {/* === Modal Roadmap === */}
-      {selectedStep && (
-        <>
-          <div
-            className="fixed inset-0 bg-black bg-opacity-75 z-40 modal-fade"
-            onClick={() => setSelectedStep(null)}
-          ></div>
-
-          <div
-            className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-2xl bg-white rounded-2xl border-2 border-dashed ${
-              roadmap.findIndex((r) => r.title === selectedStep.title) % 2 ===
-              0
-                ? "border-[#0076D6]"
-                : "border-[#F6A623]"
-            } shadow-2xl p-8 transform modal-pop`}
-          >
-            <button
+      {/* Bungkus semua modal dengan div print:hidden */}
+      <div className="print:hidden">
+        {selectedStep && (
+          <>
+            <div
+              className="fixed inset-0 bg-black bg-opacity-75 z-40 modal-fade"
               onClick={() => setSelectedStep(null)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition"
+            ></div>
+
+            <div
+              className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-2xl bg-white rounded-2xl border-2 border-dashed ${
+                roadmap.findIndex((r) => r.title === selectedStep.title) %
+                  2 ===
+                0
+                  ? "border-[#0076D6]"
+                  : "border-[#F6A623]"
+              } shadow-2xl p-8 transform modal-pop`}
             >
-              <X className="w-6 h-6" />
-            </button>
-
-            <div>
-              {/* --- PERUBAHAN DIMULAI --- */}
-              {/* Tanggal/Bulan dihapus sesuai permintaan */}
-              {/*
-              <h3
-                className={`text-lg font-semibold ${
-                  roadmap.findIndex((r) => r.title === selectedStep.title) %
-                    2 ===
-                  0
-                    ? "text-[#0076D6]"
-                    : "text-[#F6A623]"
-                } uppercase tracking-wider`}
+              <button
+                onClick={() => setSelectedStep(null)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition"
               >
-                {selectedStep.month}
-              </h3>
-              */}
+                <X className="w-6 h-6" />
+              </button>
 
-              {/* mt-2 dihapus dari h2 agar rapat ke atas */}
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                {selectedStep.title}
-              </h2>
-              {/* --- PERUBAHAN SELESAI --- */}
-
-              <p className="text-gray-700 text-lg leading-relaxed">
-                {selectedStep.desc}
-              </p>
+              <div>
+                <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                  {selectedStep.title}
+                </h2>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  {selectedStep.desc}
+                </p>
+              </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
 
       {/* === Modal Strategi === */}
-      {selectedStrategy && (
-        <>
-          <div
-            className="fixed inset-0 bg-black bg-opacity-75 z-40 modal-fade"
-            onClick={() => setSelectedStrategy(null)}
-          ></div>
-
-          <div
-            className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-2xl bg-white rounded-2xl border-2 border-dashed ${
-              selectedStrategy.color === "blue"
-                ? "border-[#0076D6]"
-                : "border-[#F6A623]"
-            } shadow-2xl p-8 transform modal-pop`}
-          >
-            <button
+      <div className="print:hidden">
+        {selectedStrategy && (
+          <>
+            <div
+              className="fixed inset-0 bg-black bg-opacity-75 z-40 modal-fade"
               onClick={() => setSelectedStrategy(null)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition"
-            >
-              <X className="w-6 h-6" />
-            </button>
+            ></div>
 
-            <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                {selectedStrategy.title}
-              </h2>
-              {/* Render konten JSX */}
-              {selectedStrategy.content}
+            <div
+              className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-2xl bg-white rounded-2xl border-2 border-dashed ${
+                selectedStrategy.color === "blue"
+                  ? "border-[#0076D6]"
+                  : "border-[#F6A623]"
+              } shadow-2xl p-8 transform modal-pop`}
+            >
+              <button
+                onClick={() => setSelectedStrategy(null)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              <div>
+                <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                  {selectedStrategy.title}
+                </h2>
+                {selectedStrategy.content}
+              </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
       {/* === Akhir Modal === */}
 
-      {/* === Tombol Kembali ke Atas (Warna Biru) === */}
+      {/* === Tombol Kembali ke Atas === */}
+      {/* Tambahkan print:hidden */}
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 p-3 bg-[#0076D6] text-white rounded-full shadow-lg hover:bg-[#005faa] transition-all duration-300 ease-in-out transform hover:scale-110"
+          className="fixed bottom-6 right-6 z-50 p-3 bg-[#0076D6] text-white rounded-full shadow-lg hover:bg-[#005faa] transition-all duration-300 ease-in-out transform hover:scale-110 print:hidden"
           aria-label="Kembali ke atas"
         >
           <ArrowUp className="w-6 h-6" />
