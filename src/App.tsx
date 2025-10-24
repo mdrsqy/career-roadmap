@@ -422,9 +422,9 @@ export default function App() {
       <section className="py-20 px-6 md:px-12 bg-white">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {strategyData.map((item, i) => {
-             // --- PERUBAHAN: Tambahkan border outline ---
-             const borderColor = item.color === "blue" ? "border-[#0076D6]" : "border-[#F6A623]";
-             return (
+            // --- PERUBAHAN: Tambahkan border outline ---
+            const borderColor = item.color === "blue" ? "border-[#0076D6]" : "border-[#F6A623]";
+            return (
               <div
                 key={i}
                 onClick={() => setSelectedStrategy(item)}
@@ -445,7 +445,7 @@ export default function App() {
                   Lihat Detail &rarr;
                 </span>
               </div>
-             );
+            );
           })}
         </div>
       </section>
@@ -502,6 +502,9 @@ export default function App() {
             </button>
 
             <div>
+              {/* --- PERUBAHAN DIMULAI --- */}
+              {/* Tanggal/Bulan dihapus sesuai permintaan */}
+              {/*
               <h3
                 className={`text-lg font-semibold ${
                   roadmap.findIndex((r) => r.title === selectedStep.title) %
@@ -513,9 +516,14 @@ export default function App() {
               >
                 {selectedStep.month}
               </h3>
-              <h2 className="text-3xl font-bold text-gray-800 mt-2 mb-4">
+              */}
+
+              {/* mt-2 dihapus dari h2 agar rapat ke atas */}
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">
                 {selectedStep.title}
               </h2>
+              {/* --- PERUBAHAN SELESAI --- */}
+
               <p className="text-gray-700 text-lg leading-relaxed">
                 {selectedStep.desc}
               </p>
